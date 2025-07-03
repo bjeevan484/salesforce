@@ -1,11 +1,10 @@
-public with sharing class loggedInUser {
-   @AuraEnabled
+public with sharing class LoggedInUser {
+    @AuraEnabled(cacheable=true)
     public static User getUserInfo() {
         return [
-            SELECT Id, Name, Email, Profile.Name
+            SELECT Id, Name, Username, Alias, IsActive
             FROM User
             WHERE Id = :UserInfo.getUserId()
-            WITH SECURITY_ENFORCED
         ];
     }
 }

@@ -1,0 +1,29 @@
+<template>
+    <lightning-card>
+        <div>Hello {fname} {lname}! </div>
+        <div>
+            <lightning-input name="firstname" placeholder= "Enter First Name" label="Enter First Name" value=""></lightning-input>
+        </div>
+        <div>
+            <lightning-input name="lastname" placeholder= "Enter Last Name" label="Enter Last Name" value=""></lightning-input>
+        </div>
+         <div>
+            <lightning-input name="pswrd" placeholder= "Enter Password" label="Enter Password" type="password" value=""></lightning-input>
+        </div>
+        <div>
+            <!--lightning-file-upload
+                label="Upload file"
+                name="fileUploader"
+                accept=".csv,.doc,.xsl,.pdf,.jpeg,.png"
+                record-id="XXXXXXXX98766"
+                onuploadfinished={handleUploadFinished}
+                multiple>
+            </lightning-file-upload-->
+        </div><br>
+        <div>
+            <lightning-button label="Submit" onclick={handleClick} class="slds-p-left_large"></lightning-button>
+            <lightning-button label="Clear" onclick={handleClear} class="slds-p-left_large"></lightning-button>
+            
+        </div>
+    </lightning-card>
+</template>

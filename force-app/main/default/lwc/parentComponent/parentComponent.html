@@ -1,0 +1,14 @@
+<template>
+    <lightning-card>
+        <!-- Child component with event listener -->
+        <c-multiple-messages-parent-to-child 
+            ongetsearchevent={handleEvent}>
+        </c-multiple-messages-parent-to-child>
+    </lightning-card>
+
+    <lightning-card>
+               <div>First Name: {firstname}</div>
+        <div>Last Name: {lastname}</div>
+
+    </lightning-card>
+</template>

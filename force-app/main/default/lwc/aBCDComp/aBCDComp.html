@@ -1,0 +1,35 @@
+<template>
+    <lightning-card title="Patient Information" icon-name="custom:custom12">
+    <template if:true={BooleanFlagValue}>
+        <lightning-input type="text" label="Enter first name "></lightning-input>
+            <lightning-input type="text" label="Enter last name"></lightning-input>
+                <lightning-input type="text" label="Enter Mobile Number"></lightning-input>
+                    <lightning-input type="text" label="Enter Email Id of patient"></lightning-input>
+                        <lightning-input type="text" label="Enter City"></lightning-input>
+                        <br/>
+                      
+        <lightning-button label="Hide Details" onclick={HideDeals} variant="brand">
+
+        
+        </lightning-button>
+    </template>
+        <template if:false={BooleanFlagValue}>
+            <br/>
+        
+            <lightning-button variant="brand" label="Show Details" onclick={ShowDeals} >
+
+            </lightning-button>
+        
+        </template>
+    
+   
+    </lightning-card><br/><br/>
+        <lightning-card title = "HTMLToJavaScript" icon-name="standard:account"></lightning-card>
+    <div>
+        <lightning-input label="Enter a letter" value={letter} onchange={letterHandler}>
+        </lightning-input>
+        </div><br/>
+        <lightning-card title="JavaScriptToHTML" icon-name="custom:custom69"></lightning-card>
+        <p>  Hello {name} ! <br> Welcome to salesforce <br/></p><br/>
+        <lightning-button variant="brand" label="Changename" onclick={nameChangeHandler}></lightning-button>
+</template>
