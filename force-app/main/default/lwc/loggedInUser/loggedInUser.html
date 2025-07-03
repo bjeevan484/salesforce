@@ -1,14 +1,25 @@
-<!-- loggedInUser.html -->
 <template>
-    <template if:true={user}>
-        <div>
-            <p>Logged-in User Information:</p>
-            <p>Name: {user.Name}</p>
-            <p>Email: {user.Email}</p>
-            <p>Profile: {user.Profile.Name}</p>
-        </div>
-    </template>
-    <template if:false={user}>
-        <p>Loading user information...</p>
-    </template>
+    <lightning-card title="Logged-In User Info" icon-name="standard:user">
+        <template if:true={user}>
+            <div class="slds-p-around_medium">
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                    <tr>
+                        <td><b>Name</b></td>
+                        <td>
+                            <a href="javascript:void(0);" onclick={handleUserClick} style="color:blue; text-decoration:underline;">
+                                {user.Name}
+                            </a>
+                        </td>
+                    </tr>
+                    <tr><td><b>Username</b></td><td>{user.Username}</td></tr>
+                    <tr><td><b>ID</b></td><td>{user.Id}</td></tr>
+                    <tr><td><b>Alias</b></td><td>{user.Alias}</td></tr>
+                    <tr><td><b>Active</b></td><td>{user.IsActive}</td></tr>
+                </table>
+            </div>
+        </template>
+        <template if:false={user}>
+            <div class="slds-p-around_medium">Loading user info...</div>
+        </template>
+    </lightning-card>
 </template>

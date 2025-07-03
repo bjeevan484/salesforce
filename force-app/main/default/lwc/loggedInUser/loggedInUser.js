@@ -1,17 +1,27 @@
-// loggedInUser.js
-import { LightningElement, track, wire } from 'lwc';
-import getUserInfo from '@salesforce/apex/loggedInUser.getUserInfo';
+import { LightningElement, wire } from 'lwc';
+import getUserInfo from '@salesforce/apex/LoggedInUser.getUserInfo';
+import { NavigationMixin } from 'lightning/navigation';
 
-export default class LoggedInUser extends LightningElement {
-    @track user;
+export default class LoggedInUser extends NavigationMixin(LightningElement) {
+    user;
 
     @wire(getUserInfo)
     wiredUser({ error, data }) {
         if (data) {
-            console.log('User data:', data); // Add this line
             this.user = data;
         } else if (error) {
-            console.error(error);
+            console.error('Error:', error);
         }
+    }
+
+    handleUserClick() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: this.user.Id,
+                objectApiName: 'User',
+                actionName: 'view'
+            }
+        });
     }
 }
