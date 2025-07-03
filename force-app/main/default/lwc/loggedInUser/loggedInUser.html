@@ -1,0 +1,14 @@
+<!-- loggedInUser.html -->
+<template>
+    <template if:true={user}>
+        <div>
+            <p>Logged-in User Information:</p>
+            <p>Name: {user.Name}</p>
+            <p>Email: {user.Email}</p>
+            <p>Profile: {user.Profile.Name}</p>
+        </div>
+    </template>
+    <template if:false={user}>
+        <p>Loading user information...</p>
+    </template>
+</template>
