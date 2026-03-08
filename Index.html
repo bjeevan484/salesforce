@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Love Questions ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+overflow:hidden;
+}
+
+.card{
+background:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+width:320px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+position:relative;
+z-index:2;
+}
+
+h2{
+color:#ff4d6d;
+}
+
+input{
+padding:10px;
+border-radius:10px;
+border:1px solid #ccc;
+width:80%;
+margin-bottom:15px;
+}
+
+button{
+padding:12px 25px;
+font-size:16px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+margin:10px;
+}
+
+.yes{
+background:#ff4d6d;
+color:white;
+}
+
+.no{
+background:#ddd;
+position:relative;
+}
+
+img{
+width:220px;
+margin-top:20px;
+border-radius:12px;
+}
+
+.heart{
+position:absolute;
+color:white;
+font-size:20px;
+animation:float 6s linear infinite;
+opacity:0.8;
+}
+
+@keyframes float{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-100vh);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+
+<h2>Enter your name ❤️</h2>
+<input id="nameInput" placeholder="Your name">
+<br>
+<button class="yes" onclick="startQuiz()">Start 💖</button>
+
+</div>
+
+<script>
+
+let username="";
+
+const questions=[
+"Do you like surprises? ❤️",
+"Do you believe in love? 💕",
+"Can I ask you something special? 😊",
+"Will you always smile today? 😍",
+"Will you be my Valentine? ❤️"
+];
+
+let index=0;
+
+function startQuiz(){
+
+username=document.getElementById("nameInput").value || "You";
+
+document.getElementById("card").innerHTML=`
+<h2 id="question">${questions[0]}</h2>
+<button class="yes" onclick="nextQuestion()">Yes 💖</button>
+<button class="no" id="noBtn">No 😅</button>
+`;
+
+activateNoButton();
+
+}
+
+function nextQuestion(){
+
+index++;
+
+if(index < questions.length){
+
+document.getElementById("question").innerText=questions[index];
+
+}
+else{
+
+document.getElementById("card").innerHTML=`
+<h1 style="color:#ff4d6d">Yaaay ${username}! Finally you said YES! ❤️</h1>
+<img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+<p>You just made my day! 💕</p>
+`;
+
+}
+
+}
+
+function activateNoButton(){
+
+const noBtn=document.getElementById("noBtn");
+
+function moveButton(){
+
+let card=document.getElementById("card");
+
+let maxX=card.clientWidth-100;
+let maxY=card.clientHeight-50;
+
+let x=Math.random()*maxX;
+let y=Math.random()*maxY;
+
+noBtn.style.position="absolute";
+noBtn.style.left=x+"px";
+noBtn.style.top=y+"px";
+
+}
+
+noBtn.addEventListener("mouseover",moveButton);
+noBtn.addEventListener("click",moveButton);
+
+}
+
+function createHeart(){
+
+const heart=document.createElement("div");
+
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=Math.random()*20+15+"px";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},6000);
+
+}
+
+setInterval(createHeart,400);
+
+</script>
+
+</body>
+</html>
