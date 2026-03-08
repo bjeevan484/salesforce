@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Love Questions ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+margin:0;
+font-family:Arial, sans-serif;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+overflow:hidden;
+}
+
+.card{
+background:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+width:340px;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
+position:relative;
+}
+
+h2{
+color:#ff4d6d;
+}
+
+input{
+padding:10px;
+border-radius:10px;
+border:1px solid #ccc;
+width:80%;
+margin-bottom:15px;
+}
+
+button{
+padding:12px 25px;
+font-size:16px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+margin:10px;
+}
+
+.yes{
+background:#ff4d6d;
+color:white;
+}
+
+.no{
+background:#ddd;
+position:absolute;
+}
+
+.message{
+margin-top:10px;
+color:#555;
+font-size:16px;
+min-height:20px;
+}
+
+.love-img{
+width:80px;
+margin-bottom:10px;
+}
+
+img{
+width:260px;
+border-radius:15px;
+margin-top:15px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+
+<h2>Enter your name ❤️</h2>
+<input id="nameInput" placeholder="Your name">
+<br>
+<button class="yes" onclick="startQuiz()">Start 💖</button>
+
+</div>
+
+<script>
+
+let username="";
+
+const questions=[
+"Do you like surprises? ❤️",
+"Do you believe in love? 💕",
+"Can I ask you something special? 😊",
+"Will you always smile today? 😍",
+"Will you be my Valentine? ❤️"
+];
+
+const noMessages=[
+"You can't escape love! 💘",
+"It keeps running 😅",
+"Just say Yes already! 😏",
+"Why are you clicking No? 🥺",
+"Okay okay press Yes 😄"
+];
+
+let index=0;
+let msgIndex=0;
+
+window.onload=function(){
+document.getElementById("nameInput").focus();
+};
+
+document.getElementById("nameInput").addEventListener("keypress",function(e){
+if(e.key==="Enter"){
+startQuiz();
+}
+});
+
+function startQuiz(){
+
+username=document.getElementById("nameInput").value || "You";
+
+document.getElementById("card").innerHTML=`
+
+<img class="love-img" src="https://cdn-icons-png.flaticon.com/512/833/833472.png">
+
+<h2 id="question">${questions[0]}</h2>
+
+<div style="position:relative;height:100px;">
+<button id="yesBtn" class="yes">Yes 💖</button>
+<button id="noBtn" class="no">No 😅</button>
+</div>
+
+<div class="message" id="message"></div>
+
+`;
+
+document.getElementById("yesBtn").onclick=nextQuestion;
+
+activateNoButton();
+
+}
+
+function nextQuestion(){
+
+index++;
+msgIndex=0;
+
+const message=document.getElementById("message");
+if(message) message.innerText="";
+
+if(index < questions.length){
+
+document.getElementById("question").innerText=questions[index];
+
+}else{
+
+document.getElementById("card").innerHTML=`
+
+<h1 style="color:#ff4d6d">
+Yaaay ${username}! Finally you said YES! ❤️
+</h1>
+
+<img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif">
+
+<p>You just made my day! 💕</p>
+
+`;
+
+heartExplosion();
+
+}
+
+}
+
+function activateNoButton(){
+
+const noBtn=document.getElementById("noBtn");
+const message=document.getElementById("message");
+
+function moveButton(){
+
+let x=Math.random()*200;
+let y=Math.random()*60;
+
+noBtn.style.left=x+"px";
+noBtn.style.top=y+"px";
+
+if(msgIndex < noMessages.length){
+message.innerText=noMessages[msgIndex];
+msgIndex++;
+}
+
+}
+
+noBtn.addEventListener("mouseover",moveButton);
+noBtn.addEventListener("click",moveButton);
+
+}
+
+function heartExplosion(){
+
+for(let i=0;i<40;i++){
+
+let heart=document.createElement("div");
+
+heart.innerHTML="❤️";
+heart.style.position="absolute";
+heart.style.left="50%";
+heart.style.top="50%";
+heart.style.fontSize="24px";
+
+document.body.appendChild(heart);
+
+let angle=Math.random()*2*Math.PI;
+let distance=200+Math.random()*200;
+
+heart.animate([
+{transform:"translate(0,0)",opacity:1},
+{transform:`translate(${Math.cos(angle)*distance}px,${Math.sin(angle)*distance}px)`,opacity:0}
+],{
+duration:1500,
+easing:"ease-out"
+});
+
+setTimeout(()=>heart.remove(),1500);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
